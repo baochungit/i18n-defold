@@ -8,17 +8,17 @@ The core is from https://github.com/kikito/i18n.lua with a little modification t
 
 ## Basic usage
 Import `i18n` lib
-```
+```lua
 local i18n = require("i18n.i18n")
 ```
 
 You then can load translations from a JSON file
-```
+```lua
 i18n.load_file(path/to/your/json/file)
 ```
 
 Or load from a lua table
-```
+```lua
 i18n.load({
   en = {
     hello = "Hello %{name}"
@@ -30,16 +30,16 @@ i18n.load({
 ```
 
 After loading translations, you may want to use it at somewhere
-```
+```lua
 print(i18n.translate("hello", { name = "Defold" }))
 ```
 Or use the shorter form
-```
+```lua
 print(i18n("hello", { name = "Defold" }))
 ```
 
 The default locale is `en`, you can set it to another one as needed by
-```
+```lua
 i18n.set_locale("fr")
 ```
 
