@@ -1,0 +1,29 @@
+local i18n = require("i18n.i18n")
+
+function init(self)
+	-- load translations from json files
+	i18n.load_file("/example/translations/en.json")
+	i18n.load_file("/example/translations/vi.json")
+	-- also load from a table
+	i18n.load({
+		fr = {
+			hello = "Bonjour %{name}"
+		}
+	})
+	i18n.load(require("example.translations.es"))
+
+	-- the default locale is "en"
+	label.set_text("/go#label_en", i18n("hello", { name = "Defold" }))
+
+	-- change locale to "vi"
+	i18n.set_locale("vi")
+	label.set_text("/go#label_vi", i18n("hello", { name = "Defold" }))
+
+	-- change locale to "fr"
+	i18n.set_locale("fr")
+	label.set_text("/go#label_fr", i18n("hello", { name = "Defold" }))
+
+	-- change locale to "es"
+	i18n.set_locale("es")
+	label.set_text("/go#label_es", i18n("hello", { name = "Defold" }))
+end
