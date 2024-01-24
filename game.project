@@ -14,4 +14,8 @@ input_method = HiddenInputField
 [project]
 title = i18n-defold
 custom_resources = /example/translations
+developer = Chung Xa
+
+[library]
+include_dirs = i18n
 
