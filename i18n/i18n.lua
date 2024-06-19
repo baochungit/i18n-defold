@@ -115,6 +115,18 @@ local function localized_translate(key, loc, data)
   return treat_node(node, data)
 end
 
+local function localized_text(key, loc)
+  local path, length = dot_split(loc .. "." .. key)
+  local node = store
+
+  for i=1, length do
+    node = node[path[i]]
+    if not node then return nil end
+  end
+
+  return node
+end
+
 -- public interface
 
 function i18n.set(key, value)
@@ -132,6 +144,19 @@ function i18n.set(key, value)
 
   local lastKey = path[length]
   node[lastKey] = value
+end
+
+function i18n.get(key, lc)
+  assert_present('translate', 'key', key)
+ 
+  local used_locale = lc or locale
+
+  local fallbacks = variants.fallbacks(used_locale, fallback_locale)
+  for i=1, #fallbacks do
+    local value = localized_text(key, fallbacks[i])
+    if value then return value end
+  end
+  return nil
 end
 
 function i18n.translate(key, data)
